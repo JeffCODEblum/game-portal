@@ -1,0 +1,49 @@
+<div id="url-div" style="display: none;" data-url="{{url}}"></div>
+<div id="jumbo" style="color: white; background-color: #11112f; width: 100%; height: 150px; display: flex; flex-direction: column; justify-content: center; align-items: left;">
+    <h1>MMGameDev</h1>
+    <h5 style="color: #ccc;">An Indie Game Dev Portfolio by Morris Miller</h5>
+</div>
+
+{{!-- <div id="nav" style="background-color: #fff; border-bottom: solid 2px #ccc; width: 100%; height: 60px; display: flex; justify-content: flex-start; align-items: center; flex-direction: row;">
+    <div class="nav-link">
+        <a href="#">Home</a>
+    </div>
+</div> --}}
+<div class="container" style="max-width: 1000px; margin-top: 10px; display: flex; flex-direction: row; justify-content: flex-start;">
+    <div style="color: #fff; background-color: #222236; display: flex; flex-direction: row; justify-content: flex-start; align-items: center; flex-wrap: wrap;">
+        {{#each items}}
+            <div style="width: 200px; height: 280px; margin: 5px; background-color: #222236; display: flex; flex-direction: column; justify-content: flex-start; align-items: center;">
+                <a href="{{../url}}/super-chicken/index.html">
+                    <img src="{{../url}}/{{this.directory}}/gif1.gif" width="200px; height: 150px;">
+                </a>
+
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <a href="{{../url}}/detail/{{this.id}}" style="font-size: 1em; color: white;">
+                            {{title}}
+                        </a>
+                        <p style="font-size: 0.8em; color: #bbb">{{description}} <a href="{{../url}}/detail/{{this.id}}" style="color: #ca3511; font-size: 1em; font-weight: bold;">Play</a></p>
+                    </div>
+                    
+                    {{!-- <div class="text-right" style="color: #fff; font-size: 0.8em;">
+                        {{timestamp}}
+                    </div> --}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<div style="background-color: #11112f; width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+    <div style="padding: 10px;">
+        {{#if showPrev}}
+            <a href="{{prev}}" style="color: #ccc;">Newer</a>
+        {{/if}}
+    </div>
+
+    <div style="padding: 10px;">
+        <a href="{{to}}" style="color: #ccc;">Older</a>
+    </div>
+</div>
+
+<script src="{{url}}/index.js"></script>

@@ -1,0 +1,50 @@
+<div id="url-div" style="display: none;" data-url="{{url}}"></div>
+<div class="container" style="color: white; width: 600px; background-color: #11112f">
+    <h1>{{title}}</h1>
+    <div style="text-align: center;">
+        {{!-- <img class="main-img" width="300" height="300" src="{{url}}/{{mainImageUrl}}"> --}}
+        <canvas id="canvas" width="{{width}}" height="{{height}}" />
+    </div>
+    <div id="id-div" style="display: none;" data-id="{{id}}"></div>
+    <p style="color: #ccc">{{body}}</p>
+    <label>Name (public)</label>
+    <input id="name-input" type="text" class="form-control" style="background-color: #222236; border: solid 1px #444444" />
+    <label>Email (hidden)</label>
+    <input id="email-input" type="email" class="form-control" style="background-color: #222236; border: solid 1px #444444" />
+    <label>Comment</label>
+    <textarea id="comment-input" rows="4" class="form-control" style="background-color: #222236; border: solid 1px #444444"></textarea>
+    <br />
+    <div style="height: 50px; display: flex; flex-direction: row; justify-content: flex-end;">
+        <button id="comment-btn" class="btn btn-default btn-sm" style="float: right; background-color: #222236; color: white;">Comment</button>
+    </div>
+    <hr />
+    {{#each comments}}
+    <div style="border-bottom: 1px #ccc solid">
+        <label>{{this.name}} says</label>
+        <p>{{this.comment}}</p>
+        <div style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end;">
+            <p>{{this.timestamp}}</p>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+
+{{!-- <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
+    {{#each imageUrls}}
+        <div style="padding: 5px;">
+            <a class="img-thmb">
+                <img width="60" height="60" src="{{../url}}/{{this}}" data-src="{{this}}">
+            </a>
+        </div>
+    {{/each}}
+</div> --}}
+<script src="{{url}}/index.js"></script>
+
+{{#each audioTags}}
+    <audio id="{{this.id}}" src="{{../url}}/{{../directory}}/{{this.path}}" preload="auto"></audio>
+{{/each}}
+
+{{#each scripts}}
+    <script src="{{../url}}/{{../directory}}/{{this}}"></script>
+{{/each}}

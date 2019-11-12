@@ -1,0 +1,29 @@
+<div id="url-div" style="display: none;" data-url="{{url}}"></div>
+<div class="container" style="max-width: 600px; background-color: #fff">
+    <h4> Create  Item</h4>
+    <div class="form-group">
+        <label>title</label>
+        <input id="title-input" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>description</label>
+        <textarea rows="2" id="description-input" type="text" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>instructions</label>
+        <textarea rows="4" id="body-input" type="text" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>directory</label>
+        <input id="directory-input" class="form-control" type="text" />
+    </div>
+
+    <div style="display: flex; flex-direction: row; justify-content: flex-end; align-items: center;">
+        <button id="cancel-btn" class="btn btn-sm btn-default" style="border: solid 1px #ccc">Cancel</button>
+        <button id="save-btn" class="btn btn-sm btn-primary">Save</button>
+    </div>
+</div>
+<script src="{{url}}/admin-new.js"></script>

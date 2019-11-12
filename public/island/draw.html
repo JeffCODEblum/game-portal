@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <body>
+	<canvas id="myCanvas" width="480" height="320"></canvas>
+	<p id="output"></p>
+	<style>
+	body {
+		background-color: rgba(0, 255, 0, 0.2);
+	}
+	canvas {
+		image-rendering: pixelated;
+	}
+	</style>
+    <script>
+	
+	var canvas = document.getElementById('myCanvas');
+	var context = canvas.getContext('2d');
+	var graphics = new Image();
+	graphics.src = './graphics.png';
+	
+	canvas.width = 120;
+	canvas.height = 300;
+	canvas.style.width = '480px';
+	canvas.style.height = '1200px';
+	var frame = 0;
+	var frame2 = 0;
+	var frame3 = 0;
+	function Run() {
+		frame++;
+		if (frame == 7) {
+			if (frame2 > 7) {
+				frame2 = 0;
+			}
+		}
+		if (frame == 15) {
+			frame = 0;
+			frame2++;
+			if (frame2 > 7) {
+				frame2 = 0;
+			}
+			frame3++;
+			if (frame3 > 2) {
+				frame3 = 0;
+			}
+		}
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.drawImage(graphics, 400, 24 * frame2, 24, 24, 0, 0, 24, 24);
+		for (var i = 0; i < 2; i++) {
+			context.drawImage(graphics, 400 + 30 * frame3, 24 * i, 24, 24, 40, 32 * i, 24, 24);
+		}
+		//context.drawImage(graphics, 400 + 30 * frame3, 0, 24, 24, 0, 32, 24, 24);
+		//context.drawImage(graphics, 400 + 30 * frame3, 24, 24, 24, 0, 32 * 2, 24, 24);
+		setTimeout(Run, 1000/60);
+	}
+	Run();
+	
+	
+    </script>
+  </body>
+</html>
