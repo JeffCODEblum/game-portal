@@ -29,7 +29,7 @@ var game = {
 	spriteSet: spriteSet
 };
 
-game.graphics.src = "./newGraphics.png";
+game.graphics.src = "../breach/newGraphics.png";
 
 map.link(game);
 player.link(game);

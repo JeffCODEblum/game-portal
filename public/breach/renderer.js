@@ -1,6 +1,6 @@
 function Renderer() {
 	var graphics = new Image();
-	graphics.src = "./graphics.png";
+	graphics.src = "../breach/graphics.png";
 	this.game;
 	
 	this.link = function(game) {

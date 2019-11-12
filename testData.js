@@ -118,32 +118,26 @@ module.exports = {
             ]
         },
         {
-            title: 'Lattice',
-            description: 'An arcade adventure game with goblins and swords.',
-            body: 'Use W, A, S, D to move, J to attack',
-            directory: 'lattice',
-            width: '480',
-            height: '320',
-            audioTags: [
-                {id: "coin", path: "Pickup_Coin9.wav"},
-                {id: "hit", path: "Hit_Hurt5.wav"},
-                {id: "hit2", path: "Hit_Hurt7.wav"}
-            ],
-            scripts: [
-                "index.js"
-            ]
-        },
-        {
             title: 'Island World',
-            description: '',
-            body: 'Use W, A, S, D to move, J to get in and out of the boat.',
+            description: 'A nice little pixel art concept about eploration.',
+            body: 'Use W, A, S, D to move, J to get in and out of the boat. K to look at the map.',
             directory: 'island',
-            width: '',
-            height: '',
+            width: '240',
+            height: '160',
             audioTags: [
-               
+                {id: "theme", path: "./reggae.wav"},
+                {id: "blipSound", path: "./blip3.wav"}
             ],
             scripts: [
+                "sprites.js",
+                "map.js",
+                "tile.js",
+                "player.js",
+                "ctrl.js",
+                "textEngine.js",
+                "objectEngine.js",
+                "ws.js",
+                "bs.js",
                 "index.js"
             ]
         }

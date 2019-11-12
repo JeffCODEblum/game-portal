@@ -1,26 +1,3 @@
-<!doctype>
-<html>
-<head>
-<style>
-canvas {
-	image-rendering: pixelated;
-}
-</style>
-<audio id="theme" loop="loop" autoplay="autoplay" src="./reggae.wav" preload="auto"></audio>
-<audio id="blipSound" src="./blip3.wav" preload="auto"></audio>
-</head>
-<body>
-<canvas id="canvas" width="240px" height="160px"></canvas>
-<script src ="./sprites.js"></script>
-<script src="./map.js"></script>
-<script src="./tile.js"></script>
-<script src="./player.js"></script>
-<script src="./ctrl.js"></script>
-<script src="./textEngine.js"></script>
-<script src="./objectEngine.js"></script>
-<script src="./ws.js"></script>
-<script src="./bs.js"></script>
-<script>
 
 var game = {
 	canvas: document.getElementById("canvas"),
@@ -60,6 +37,3 @@ function Render() {
 		game.ws.render();
 	}
 }
-</script>
-</body>
-</html>
