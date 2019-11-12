@@ -9,6 +9,7 @@
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Views</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>
@@ -17,6 +18,7 @@
                 {{#each items}}
                     <tr>
                         <td>{{this.title}}</td>
+                        <td>{{this.views}}</td>
                         <td>{{this.timestamp}}</td>
                         <td>
                             <button class="edit-btn btn btn-sm btn-default" style="border: 1px solid #ccc" data-id="{{this.id}}">

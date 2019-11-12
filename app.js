@@ -21,10 +21,11 @@ const ItemSchema = new mongoose.Schema({
     timestamp: String, 
     body: String, 
     directory: String, 
-    width: Number, 
-    height: Number, 
+    width: String, 
+    height: String, 
     audioTags: [{id: String, path: String}], 
-    scripts: [String]
+    scripts: [String],
+    views: Number
 });
 const ItemModel = new mongoose.model('ItemModel', ItemSchema);
 
@@ -64,24 +65,49 @@ function authenticate(req, res, callback) {
 }
 
 // dummy data load
-app.get('/prime-db', (req, res) => {
-    for (let i = 0; i < data.items.length; i++) {
-        const model = new ItemModel({
-            title: data.items[i].title,
-            description: data.items[i].description,
-            directory: data.items[i].directory,
-            timestamp: '' + Date.now() - i * 1000 * 60 * 60 * 24 * 31,
-            body: data.items[i].body,
-            width: data.items[i].width,
-            height: data.items[i].height,
-            audioTags: data.items[i].audioTags,
-            scripts: data.items[i].scripts
-        });
-        model.save();
-    }
-    res.send(true);
-    return;
-});
+// app.get('/prime-db', (req, res) => {
+//     for (let i = 0; i < data.items.length; i++) {
+//         const model = new ItemModel({
+//             title: data.items[i].title,
+//             description: data.items[i].description,
+//             directory: data.items[i].directory,
+//             timestamp: '' + Date.now() - i * 1000 * 60 * 60 * 24 * 31,
+//             body: data.items[i].body,
+//             width: data.items[i].width,
+//             height: data.items[i].height,
+//             audioTags: data.items[i].audioTags,
+//             scripts: data.items[i].scripts
+//         });
+//         model.save();
+//     }
+//     res.send(true);
+//     return;
+// });
+async function PrimeDb() {
+    await ItemModel.find({}, (err, docs) => {
+        if (err) {
+            console.log(err);
+        }
+        if (docs.length === 0) {
+                for (let i = 0; i < data.items.length; i++) {
+                const model = new ItemModel({
+                    title: data.items[i].title,
+                    description: data.items[i].description,
+                    directory: data.items[i].directory,
+                    timestamp: '' + Date.now() - i * 1000 * 60 * 60 * 24 * 31,
+                    body: data.items[i].body,
+                    width: data.items[i].width,
+                    height: data.items[i].height,
+                    audioTags: data.items[i].audioTags,
+                    scripts: data.items[i].scripts
+                });
+                model.save();
+            }
+        }
+    });
+}
+PrimeDb();
+
  
 // home page
 app.get('/', (req, res) => {
@@ -125,13 +151,13 @@ app.get('/from/:from', (req, res) => {
 
 // detail page
 app.get('/detail/:id', (req, res) => {
-    ItemModel.findOne({_id: req.params.id}, (err, doc) => {
+    ItemModel.findOneAndUpdate({_id: req.params.id}, {$inc: {views: 1}}, (err, doc) => {
         if (err) {
             console.log(err);
             res.sendStatus(500);
         }
         if (doc) {
-            CommentModel.find({postId: req.params.id}, (err, docs) => {
+            CommentModel.find({postId: req.params.id, hidden: false}, (err, docs) => {
                 if (err) {
                     console.log(err);
                     res.sendStatus(500);
@@ -157,7 +183,8 @@ app.get('/detail/:id', (req, res) => {
                         width: doc.width,
                         height: doc.height,
                         audioTags: doc.audioTags,
-                        scripts: doc.scripts
+                        scripts: doc.scripts,
+                        views: doc.views
                     };
                     res.render('detail', context);
                 }
@@ -201,6 +228,7 @@ app.get('/admin', (req, res) => {
                     id: item.id, 
                     title: item.title, 
                     directory: item.directory,
+                    views: item.views,
                     timestamp: Moment(parseInt(item.timestamp)).format('MMMM Do YYYY')
                 }});
                 context.editItem = false;
@@ -243,6 +271,7 @@ app.get('/admin/:id', (req, res) => {
                                 name: doc.name,
                                 email: doc.email,
                                 comment: doc.comment,
+                                hidden: doc.hidden,
                                 timestamp: Moment(parseInt(doc.timestamp)).format('MMMM Do YYYY')
                             } 
                         });
@@ -283,6 +312,44 @@ app.post('/post-comment/:id', (req, res) => {
         if (doc) {
             res.send(true);
         }
+        return;
+    });
+    return;
+});
+
+app.post('/hide-comment/:id', (req, res) => {
+    console.log("hit hide comment");
+    authenticate(req, res, () => {
+        const id = req.params.id;
+        CommentModel.findOneAndUpdate({_id: id}, {hidden: true}, (err, doc) => {
+            if (err) {
+                console.log(err);
+                res.send(500);
+            }
+            if (doc) {
+                res.send(true);
+            }
+            return;
+        });
+        return;
+    });
+    return;
+});
+
+app.post('/show-comment/:id', (req, res) => {
+    console.log("hit show comment");
+    authenticate(req, res, () => {
+        const id = req.params.id;
+        CommentModel.findOneAndUpdate({_id: id}, {hidden: false}, (err, doc) => {
+            if (err) {
+                console.log(err);
+                res.send(500);
+            }
+            if (doc) {
+                res.send(true);
+            }
+            return;
+        });
         return;
     });
     return;
