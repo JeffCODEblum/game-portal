@@ -1,8 +1,7 @@
 # blog2
 
-This is a full stack blog MVP in node.js
+I built this game portal to serve as my indie game dev portfolio
 
-![Screenshot of blog home screen](./blog1.PNG)
-![Screenshot of blog home screen](./blog2.PNG)
+www.mmgamedev.com
 
-To run the app use npm install && npm start
+![gif of mmgamedev home screen](./mmgamedev.gif)
