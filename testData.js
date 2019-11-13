@@ -86,12 +86,12 @@ module.exports = {
             description: 'A browser-based first person shooter concept.',
             body: 'W, A, S, D to move, mouse to look and shoot.',
             directory: 'threejs-fps',
-            width: '100%',
-            height: '100vh',
+            width: '800',
+            height: '600',
             audioTags: [
             ],
             scripts: [
-                'main.js'
+                'index.js'
             ]
         },
         {
