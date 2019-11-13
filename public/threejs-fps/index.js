@@ -363,6 +363,7 @@ var Controller = function() {
   var PI_2 = Math.PI / 2;
   
   window.onload = function() {
+    $("#game-wrapper").css('display', '');
     var havePointerLock =
       "pointerLockElement" in document ||
       "mozPointerLockElement" in document ||
