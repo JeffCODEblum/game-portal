@@ -295,6 +295,11 @@ app.post('/post-comment/:id', (req, res) => {
     const timestamp = Date.now() + '';
     const id = req.params.id;
 
+    if (! (name && email && comment && id)) {
+        res.sendStatus(403);
+        return;
+    }
+
     const commentModel = new CommentModel({
         name: name,
         email: email,

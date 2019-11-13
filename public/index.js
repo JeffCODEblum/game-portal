@@ -22,16 +22,24 @@ $( document ).ready(function() {
             comment: comment
         };
 
-        $.ajax({
-            type: 'POST',
-            url: URL + '/post-comment/' + id,
-            contentType: 'application/json; charset=utf-8',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem("jwt"));
-            },
-            data: JSON.stringify(payload)
-        }).done(function(data) {
-
-        });
+        if (payload.name && payload.email && payload.comment) {
+            $.ajax({
+                type: 'POST',
+                url: URL + '/post-comment/' + id,
+                contentType: 'application/json; charset=utf-8',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", localStorage.getItem("jwt"));
+                },
+                data: JSON.stringify(payload)
+            }).done(function(data) {
+                alert("Thanks! Your comment is pending approval");
+                $("#name-input").val('');
+                $("#email-input").val('');
+                $("#comment-input").val('');
+            });
+        }
+        else {
+            alert("all are fields required");
+        }
     });
 });
